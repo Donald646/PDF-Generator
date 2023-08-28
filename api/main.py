@@ -4,9 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import os
 
-#from dotenv import load_dotenv
-#import openai
-#load_dotenv()
+# from dotenv import load_dotenv
+# import openai
+# load_dotenv()
 
 app = Flask(__name__)
 api = Api(app)
@@ -14,10 +14,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 CORS(app)
 
+
 class PDFModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     file_name = db.Column(db.String(50), nullable=False)
     url = db.Column(db.String(50), nullable=False)
+
 
 resource_fields = {
     "id": fields.Integer,
@@ -31,14 +33,15 @@ class PDF(Resource):
     def get(self):
         result = PDFModel.query.all()
         return result, 200
-    
+
     def post(self):
         data = request.get_json()
         print(data)
-        new_pdf = PDFModel(file_name = data["file_name"], url = data["url"] )
+        new_pdf = PDFModel(file_name=data["file_name"], url=data["url"])
         db.session.add(new_pdf)
         db.session.commit()
-        return {'message':"file uploaded"}, 201
+        return {'message': "file uploaded"}, 201
+
 
 class HandlePrompt(Resource):
     def post(self):
@@ -55,7 +58,6 @@ class HandlePrompt(Resource):
         print(data)
 
         """
-
 
 
 api.add_resource(PDF, "/pdf")
