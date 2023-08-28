@@ -1,0 +1,31 @@
+
+.prompt-container {
+  text-align: center;
+}
+
+
+.prompt-container textarea {
+  width:100%;
+  height: 100px;
+  resize: none;
+  border-radius: 10px;
+  border-width: 3px;
+  border-color: black;
+  margin:0px;
+
+  box-sizing: border-box;
+}
+.prompt-container button {
+  background-color: 	#3b37ff;
+  border-radius: 10px;
+  border: 10px;
+  padding: 10px;
+  color: white;
+  margin: 10px;
+  width: 150px;
+
+}
+
+.prompt-input-container {
+
+}
