@@ -11,11 +11,12 @@ import { BrowserRouter, Routes, Route, Link, Router } from "react-router-dom";
 const API_URL = "http://127.0.0.1:5000";
 function App() {
   const [input, setInput] = useState(""); //is in parent component to check for length
-  const [response, setResponse] = useState([]); //might have to turn into a list so can easily deconstruct in document.js
+  const [response, setResponse] = useState([]);
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;
   const [instance, updateInstance] = usePDF({ document: MyDoc });
   const [isOnLibrary, setIsOnLibrary] = useState(false);
+
   const handleInput = (e) => {
     setInput(e.target.value);
   };
@@ -44,10 +45,6 @@ function App() {
     console.log("Download Succesfully");
   };
 
-  const handleLibrary = () => {
-    setIsOnLibrary(!isOnLibrary);
-  };
-
   return (
     <BrowserRouter>
       <Routes>
@@ -56,11 +53,11 @@ function App() {
           element={
             <>
               <h1>PDF Generator</h1>
-              <button className="library-button" onClick={handleLibrary}>
-                <Link className="library-link" to="/Library">
-                  Library
-                </Link>
-              </button>
+
+              <Link className="library-link" to="/Library">
+                Library
+              </Link>
+
               <ViewPDF
                 handleDownloadPdf={handleDownloadPdf}
                 response={response}
@@ -74,7 +71,7 @@ function App() {
             </>
           }
         />
-        {/* Conditionally render LibraryPage when isOnLibrary is true */}
+
         <Route path="/Library" element={<LibraryPage />} />
       </Routes>
     </BrowserRouter>

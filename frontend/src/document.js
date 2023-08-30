@@ -38,7 +38,7 @@ export const MyDocument = ({ response }) => {
         <Text style={styles.h1}>Math Problems</Text>
         <View style={styles.questionContainer}>
           {questionList.map((question, index) => (
-            <Text style={styles.questions} key={index}>{`${
+            <Text wrap={false} style={styles.questions} key={index}>{`${
               index + 1
             }. ${question}`}</Text>
           ))}

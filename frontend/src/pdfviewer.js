@@ -4,10 +4,12 @@ import { PDFViewer } from "@react-pdf/renderer";
 export const ViewPDF = ({ handleDownloadPdf, response }) => {
   return (
     <div className="pdf-container">
-      <PDFViewer width="100%" height="650">
+      <PDFViewer className="pdf-viewer" width="100%" height="650">
         <MyDocument response={response} />
       </PDFViewer>
-      <button onClick={handleDownloadPdf}>Save to Library</button>
+      <button className="save-button" onClick={handleDownloadPdf}>
+        Save to Library
+      </button>
     </div>
   );
 };

@@ -12,34 +12,64 @@
   border-width: 3px;
   border-color: black;
   margin:0px;
-
   box-sizing: border-box;
 }
 .prompt-container button {
-  background-color: 	#3b37ff;
+  background-color:#3b37ff;
   border-radius: 10px;
   border: 10px;
   padding: 10px;
   color: white;
   margin: 10px;
   width: 150px;
-
+  cursor: pointer;
 }
 
-.pdf-container button{
-  margin: 20px; 
-}
-
-.library-button {
-  background-color: 	#3b37ff;
+.pdf-viewer {
   border-radius: 10px;
-  border: 10px;
+
+}
+
+
+.library-link {
+  background-color: #3b37ff;
+  border-radius: 10px;
   padding: 10px;
   margin: 10px;
   width: 150px;
-}
-
-.library-link{
+  display: inline-block;
+  text-align: center;
   text-decoration: none;
   color: white;
+  font:none;
+}
+
+  .save-button {
+    background-color: 	#3b37ff;
+    border-radius: 10px;
+    border: 10px;
+    padding: 10px;
+    color: white;
+    margin: 10px;
+    width: 150px;
+    cursor: pointer;
+  }
+
+.back-arrow {
+  height: 32px;
+  width: 32px;
+
+
+}
+
+.library {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  flex-wrap: wrap;
+}
+.document-boxes {
+  margin: 10px;
+  padding: 5px;
+  border: black solid 3px;
 }
