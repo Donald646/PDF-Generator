@@ -1,12 +1,12 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
-import { MyDocument } from "./document";
-import { PromptInput } from "./promptinput";
-import { LibraryPage } from "./library";
-import { ViewPDF } from "./pdfviewer";
-
+import { MyDocument } from "./Components/document";
+import { PromptInput } from "./Components/promptinput";
+import { LibraryPage } from "./Components/library";
+import { ViewPDF } from "./Components/pdfviewer";
+import { AboutPage } from "./Components/about";
 import { usePDF } from "@react-pdf/renderer";
-import { BrowserRouter, Routes, Route, Link, Router } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const API_URL = "http://127.0.0.1:5000";
 function App() {
@@ -15,7 +15,6 @@ function App() {
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;
   const [instance, updateInstance] = usePDF({ document: MyDoc });
-  const [isOnLibrary, setIsOnLibrary] = useState(false);
 
   const handleInput = (e) => {
     setInput(e.target.value);
@@ -47,17 +46,26 @@ function App() {
 
   return (
     <BrowserRouter>
+      <nav>
+        <h1>
+          <Link className="title" to="/">
+            Worksheet Wiz
+          </Link>
+        </h1>
+        <div className="nav-bar-buttons">
+          <Link className="library-link" to="/Library">
+            Library
+          </Link>
+          <Link className="library-link" to="/About">
+            About
+          </Link>
+        </div>
+      </nav>
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <h1>PDF Generator</h1>
-
-              <Link className="library-link" to="/Library">
-                Library
-              </Link>
-
               <ViewPDF
                 handleDownloadPdf={handleDownloadPdf}
                 response={response}
@@ -73,6 +81,7 @@ function App() {
         />
 
         <Route path="/Library" element={<LibraryPage />} />
+        <Route path="/About" element={<AboutPage />} />
       </Routes>
     </BrowserRouter>
   );

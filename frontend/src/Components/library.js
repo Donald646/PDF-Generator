@@ -14,10 +14,6 @@ export const LibraryPage = () => {
   }, []);
   return (
     <>
-      <Link to="/">
-        <img className="back-arrow" src="backarrow.png" />
-      </Link>
-
       <div className="library">
         {documentData.map((document) => {
           return (

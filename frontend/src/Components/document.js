@@ -1,7 +1,6 @@
 import { React } from "react";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
-// Create Document Component
 export const MyDocument = ({ response }) => {
   const questionList = [
     "Samantha has 5 apples and gives 2 to her friend. How many apples does she have left? If a pizza is divided into 8 equal slices and 3 are eaten, how many slices are left?",
@@ -37,7 +36,7 @@ export const MyDocument = ({ response }) => {
       <Page style={styles.page}>
         <Text style={styles.h1}>Math Problems</Text>
         <View style={styles.questionContainer}>
-          {questionList.map((question, index) => (
+          {response.map((question, index) => (
             <Text wrap={false} style={styles.questions} key={index}>{`${
               index + 1
             }. ${question}`}</Text>

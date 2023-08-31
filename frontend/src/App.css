@@ -31,18 +31,7 @@
 }
 
 
-.library-link {
-  background-color: #3b37ff;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  width: 150px;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  font:none;
-}
+
 
   .save-button {
     background-color: 	#3b37ff;
@@ -65,11 +54,51 @@
 .library {
   display: flex;
   flex-direction: row;
-  width: 100vw;
   flex-wrap: wrap;
 }
 .document-boxes {
   margin: 10px;
+  margin-right: 20px;
   padding: 5px;
+  margin-left: 0px;
   border: black solid 3px;
+}
+
+nav {
+  display:flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: black solid 3px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  
+}
+
+.title {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  color:#3b37ff
+}
+
+.library-link {
+  background-color: #3b37ff;
+  border-radius: 10px;
+  padding: 10px;
+
+margin:10px;
+  width: 150px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  
+}
+
+.nav-bar-buttons {
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
+  
 }

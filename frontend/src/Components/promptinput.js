@@ -3,29 +3,36 @@ import { React, useState } from "react";
 const API_URL = "http://127.0.0.1:5000";
 // send get request to backend to get the answer to the prompt from GPT
 
+// TODO:
+// work on handleSubmit
+
 export const PromptInput = ({
   handleInput,
   input,
-  handleReponse,
+  handleResponse,
   setInput,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     if (input.trim() === "") {
       return alert("Enter something");
     }
-    const jsonData = {};
+    const jsonData = {
+      prompt: input,
+    };
     const response = await fetch(`${API_URL}/handle-prompt`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(jsonData),
-    }); // might have to turn into a post request so I can send in data
-    const data = response.json();
-    // parse data
-    // handleResponse(parsed data)
+    });
+    const data = await response.json();
+    console.log(JSON.parse(data.reply));
+    handleResponse(JSON.parse(data.reply));
+    setIsLoading(false);
     setInput("");
   };
 
@@ -34,7 +41,9 @@ export const PromptInput = ({
       <form className="prompt-container" onSubmit={handleSubmit}>
         <textarea type="text" value={input} onChange={handleInput} />
 
-        <button type="submit">Generate Prompt</button>
+        <button type="submit" disabled={isLoading}>
+          Generate Prompt
+        </button>
       </form>
     </>
   );
