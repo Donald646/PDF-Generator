@@ -5,8 +5,10 @@ import { PromptInput } from "./Components/promptinput";
 import { LibraryPage } from "./Components/library";
 import { ViewPDF } from "./Components/pdfviewer";
 import { AboutPage } from "./Components/about";
+import { DefaultInput } from "./Components/defaultinput";
 import { usePDF } from "@react-pdf/renderer";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Switch } from "@mui/material/";
 
 const API_URL = "http://127.0.0.1:5000";
 function App() {
@@ -15,6 +17,7 @@ function App() {
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;
   const [instance, updateInstance] = usePDF({ document: MyDoc });
+  const [advancedMode, setAdvancedMode] = useState(false);
 
   const handleInput = (e) => {
     setInput(e.target.value);
@@ -44,6 +47,10 @@ function App() {
     console.log("Download Succesfully");
   };
 
+  const handleAdvanced = () => {
+    setAdvancedMode(!advancedMode);
+  };
+
   return (
     <BrowserRouter>
       <nav>
@@ -70,12 +77,28 @@ function App() {
                 handleDownloadPdf={handleDownloadPdf}
                 response={response}
               />
-              <PromptInput
-                input={input}
-                handleInput={handleInput}
-                handleResponse={handleResponse}
-                setInput={setInput}
+              <Switch
+                checked={advancedMode}
+                onChange={handleAdvanced}
+                inputProps={{ "aria-label": "controlled" }}
+                name="Advanced Mode"
               />
+              {advancedMode ? (
+                <>
+                  <span>Advanced</span>
+                  <PromptInput
+                    input={input}
+                    handleInput={handleInput}
+                    handleResponse={handleResponse}
+                    setInput={setInput}
+                  />
+                </>
+              ) : (
+                <>
+                  <span>Default</span>
+                  <DefaultInput handleResponse={handleResponse} />
+                </>
+              )}
             </>
           }
         />

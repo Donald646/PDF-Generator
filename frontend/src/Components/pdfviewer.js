@@ -7,7 +7,7 @@ export const ViewPDF = ({ handleDownloadPdf, response }) => {
       <PDFViewer className="pdf-viewer" width="100%" height="650">
         <MyDocument response={response} />
       </PDFViewer>
-      <button className="save-button" onClick={handleDownloadPdf}>
+      <button className="all-buttons save-button" onClick={handleDownloadPdf}>
         Save to Library
       </button>
     </div>

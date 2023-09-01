@@ -53,6 +53,10 @@ class PDF(Resource):
 class HandlePrompt(Resource):
     def post(self):
         data = request.get_json()
+        if data['type'] == "advanced":
+            content = data["prompt"]
+        else:
+            content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long."
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -60,11 +64,10 @@ class HandlePrompt(Resource):
                 {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long."},
                 # if wanted to improve add more examples in the future
                 {"role": "assistant",
-                    "content": '["Simplify the expression: 3x + 2y - 4x - 7y", " Solve the equation: 5x + 7 = 22", "Expand the expression: 2(x + 3y)", "Solve the equation: 2(3x - 4) = 10x - 6", "Simplify the expression: 4(x + 2) + 3(x - 1)","Solve the equation: 2x/3 + 5 = 10", "Factorize the expression: 6x^2 - 15x.", "Solve the equation: 3(x - 4) - 2(x + 1) = 4x - 7.", "Solve the equation: 2x/5 - 1 = 3(x + 2)/10.", "Simplify the expression: 2(x - 1) - 3(2x + 1)."]'},
-                {"role": "user", "content": data["prompt"]},
+                 "content": '["Simplify the expression: 3x + 2y - 4x - 7y", " Solve the equation: 5x + 7 = 22", "Expand the expression: 2(x + 3y)", "Solve the equation: 2(3x - 4) = 10x - 6", "Simplify the expression: 4(x + 2) + 3(x - 1)","Solve the equation: 2x/3 + 5 = 10", "Factorize the expression: 6x^2 - 15x.", "Solve the equation: 3(x - 4) - 2(x + 1) = 4x - 7.", "Solve the equation: 2x/5 - 1 = 3(x + 2)/10.", "Simplify the expression: 2(x - 1) - 3(2x + 1)."]'},
+                {"role": "user", "content": content},
             ]
         )
-
         return {"reply": response['choices'][0]['message']['content']}
 
 

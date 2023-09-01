@@ -1,0 +1,138 @@
+import { React, useState } from "react";
+import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
+
+const API_URL = "http://127.0.0.1:5000";
+
+export const DefaultInput = ({ handleResponse }) => {
+  const [info, setInfo] = useState({
+    type: "default",
+    grade: "",
+    topic: "",
+    length: "",
+  });
+  const [isDisabled, setIsDisabled] = useState(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    handleDisabled();
+    const response = await fetch(`${API_URL}/handle-prompt`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    });
+    const data = await response.json();
+    console.log(data);
+    handleResponse(JSON.parse(data.reply));
+    resetInfo();
+    handleDisabled();
+  };
+
+  const handleInfoChange = (event) => {
+    const { name, value } = event.target;
+    setInfo((prevInfo) => ({
+      ...prevInfo,
+      [name]: value,
+    }));
+  };
+
+  const handleDisabled = () => {
+    setIsDisabled(!isDisabled);
+  };
+
+  const resetInfo = () => {
+    setInfo({
+      type: "default",
+      grade: "",
+      topic: "",
+      length: "",
+    });
+  };
+
+  const topics = [
+    "Addition",
+    "Subtraction",
+    "Multiplication",
+    "Division",
+    "Algebra 1",
+    "Geometry",
+    "Algebra 2",
+    "Pre-Calculus",
+    "Calculus",
+  ];
+
+  console.log(info);
+  const styles = { dropdowns: { m: 1 } };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Box sx={{ minWidth: 120, m: 1 }}>
+        <FormControl fullWidth required sx={styles.dropdowns}>
+          <InputLabel id="demo-simple-select-label">Grade Level</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={info.grade}
+            name="grade"
+            label="grade"
+            onChange={handleInfoChange}
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((grade) => (
+              <MenuItem key={grade} value={grade}>
+                {grade}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth required sx={styles.dropdowns}>
+          <InputLabel>Topic</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={info.topic}
+            name="topic"
+            label="topic"
+            onChange={handleInfoChange}
+          >
+            {topics.map((topic, index) => (
+              <MenuItem key={index} value={topic}>
+                {topic}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth required sx={styles.dropdowns}>
+          <InputLabel id="demo-simple-select-label">
+            Length (number of questions)
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={info.length}
+            name="length"
+            label="length"
+            onChange={handleInfoChange}
+          >
+            {Array.from({ length: 20 }, (_, index) => index + 1).map(
+              (length, index) => (
+                <MenuItem key={index} value={length}>
+                  {length}
+                </MenuItem>
+              )
+            )}
+          </Select>
+        </FormControl>
+
+        <button
+          type="submit"
+          className="all-buttons default-generate-button"
+          disabled={isDisabled}
+        >
+          Generate
+        </button>
+      </Box>
+    </form>
+  );
+};
