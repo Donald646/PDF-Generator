@@ -13,7 +13,8 @@ export const DefaultInput = ({ handleResponse }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    handleDisabled();
+    setIsDisabled(true);
+
     const response = await fetch(`${API_URL}/handle-prompt`, {
       method: "POST",
       headers: {
@@ -25,7 +26,7 @@ export const DefaultInput = ({ handleResponse }) => {
     console.log(data);
     handleResponse(JSON.parse(data.reply));
     resetInfo();
-    handleDisabled();
+    setIsDisabled(false);
   };
 
   const handleInfoChange = (event) => {
@@ -34,10 +35,6 @@ export const DefaultInput = ({ handleResponse }) => {
       ...prevInfo,
       [name]: value,
     }));
-  };
-
-  const handleDisabled = () => {
-    setIsDisabled(!isDisabled);
   };
 
   const resetInfo = () => {
@@ -61,16 +58,15 @@ export const DefaultInput = ({ handleResponse }) => {
     "Calculus",
   ];
 
-  console.log(info);
-  const styles = { dropdowns: { m: 1 } };
+  const styles = { dropdowns: { m: 1, width: 150, marginLeft: 0 } };
 
   return (
     <form onSubmit={handleSubmit}>
       <Box sx={{ minWidth: 120, m: 1 }}>
         <FormControl fullWidth required sx={styles.dropdowns}>
-          <InputLabel id="demo-simple-select-label">Grade Level</InputLabel>
+          <InputLabel id="grade-level">Grade Level</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
+            labelId="grade-level"
             id="demo-simple-select"
             value={info.grade}
             name="grade"
@@ -88,8 +84,8 @@ export const DefaultInput = ({ handleResponse }) => {
         <FormControl fullWidth required sx={styles.dropdowns}>
           <InputLabel>Topic</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="topic"
+            id="topic"
             value={info.topic}
             name="topic"
             label="topic"
@@ -104,12 +100,10 @@ export const DefaultInput = ({ handleResponse }) => {
         </FormControl>
 
         <FormControl fullWidth required sx={styles.dropdowns}>
-          <InputLabel id="demo-simple-select-label">
-            Length (number of questions)
-          </InputLabel>
+          <InputLabel id="length">Length</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="length"
+            id="length"
             value={info.length}
             name="length"
             label="length"
@@ -118,21 +112,23 @@ export const DefaultInput = ({ handleResponse }) => {
             {Array.from({ length: 20 }, (_, index) => index + 1).map(
               (length, index) => (
                 <MenuItem key={index} value={length}>
-                  {length}
+                  {length} questions
                 </MenuItem>
               )
             )}
           </Select>
         </FormControl>
-
-        <button
-          type="submit"
-          className="all-buttons default-generate-button"
-          disabled={isDisabled}
-        >
-          Generate
-        </button>
       </Box>
+      <button
+        type="submit"
+        className="all-buttons default-generate-button"
+        disabled={isDisabled}
+        style={
+          isDisabled ? { backgroundColor: "gray", cursor: "not-allowed" } : null
+        }
+      >
+        Generate
+      </button>
     </form>
   );
 };

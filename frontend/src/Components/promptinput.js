@@ -46,6 +46,11 @@ export const PromptInput = ({
           type="submit"
           className="all-buttons advanced-generate-button"
           disabled={isLoading}
+          style={
+            isLoading
+              ? { backgroundColor: "gray", cursor: "not-allowed" }
+              : null
+          }
         >
           Generate Prompt
         </button>
