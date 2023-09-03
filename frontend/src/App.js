@@ -18,6 +18,12 @@ function App() {
   const MyDoc = <MyDocument response={response} />;
   const [instance, updateInstance] = usePDF({ document: MyDoc });
   const [advancedMode, setAdvancedMode] = useState(false);
+  const [info, setInfo] = useState({
+    type: "default",
+    grade: "",
+    topic: "",
+    length: "",
+  });
 
   const handleInput = (e) => {
     setInput(e.target.value);
@@ -51,6 +57,10 @@ function App() {
     setAdvancedMode(!advancedMode);
   };
 
+  const handleInfo = (object) => {
+    setInfo(object);
+  };
+
   return (
     <BrowserRouter>
       <nav>
@@ -76,6 +86,7 @@ function App() {
               <ViewPDF
                 handleDownloadPdf={handleDownloadPdf}
                 response={response}
+                info={info}
               />
               <Switch
                 checked={advancedMode}
@@ -96,7 +107,11 @@ function App() {
               ) : (
                 <>
                   <span>Default</span>
-                  <DefaultInput handleResponse={handleResponse} />
+                  <DefaultInput
+                    handleResponse={handleResponse}
+                    handleInfo={handleInfo}
+                    info={info}
+                  />
                 </>
               )}
             </>

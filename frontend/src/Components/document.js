@@ -1,7 +1,7 @@
 import { React } from "react";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
-export const MyDocument = ({ response }) => {
+export const MyDocument = ({ response, info }) => {
   const styles = StyleSheet.create({
     page: {
       display: "flex",
@@ -20,11 +20,11 @@ export const MyDocument = ({ response }) => {
       textAlign: "center",
     },
   });
-
+  console.log(info);
   return (
-    <Document title="Worksheet">
+    <Document title={info?.topic === "" ? "Worksheet" : info?.topic}>
       <Page style={styles.page}>
-        <Text style={styles.h1}>Math Problems</Text>
+        <Text style={styles.h1}>{info?.topic}</Text>
         <View style={styles.questionContainer}>
           {response.map((question, index) => (
             <Text wrap={false} style={styles.questions} key={index}>{`${

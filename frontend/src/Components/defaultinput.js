@@ -3,13 +3,7 @@ import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
 const API_URL = "http://127.0.0.1:5000";
 
-export const DefaultInput = ({ handleResponse }) => {
-  const [info, setInfo] = useState({
-    type: "default",
-    grade: "",
-    topic: "",
-    length: "",
-  });
+export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,17 +25,17 @@ export const DefaultInput = ({ handleResponse }) => {
 
   const handleInfoChange = (event) => {
     const { name, value } = event.target;
-    setInfo((prevInfo) => ({
+    handleInfo((prevInfo) => ({
       ...prevInfo,
       [name]: value,
     }));
   };
 
   const resetInfo = () => {
-    setInfo({
+    handleInfo({
       type: "default",
       grade: "",
-      topic: "",
+      topic: info?.topic,
       length: "",
     });
   };
