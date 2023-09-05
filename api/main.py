@@ -55,12 +55,18 @@ class HandlePrompt(Resource):
         data = request.get_json()
 
         hint = ""
-
+        type = ""
         if data['type'] == "advanced":
             content = data["prompt"]
-        elif data["hint"]:
+
+        if data["hint"]:
             hint = "Include a hint at the end of each question."
-        content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint}"
+
+        if data['questionType']:
+            type = data['questionType']
+
+        content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint} Make the type of problem a {type}"
+        print(content)
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[

@@ -38,6 +38,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
       topic: info?.topic,
       length: "",
       hint: false,
+      questionType: "",
     });
   };
 
@@ -52,6 +53,8 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
     "Pre-Calculus",
     "Calculus",
   ];
+
+  const questionTypes = ["Word Problems", "Computational Problems"];
 
   const styles = { dropdowns: { m: 1, width: 150, marginLeft: 0 } };
 
@@ -123,6 +126,24 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
           >
             <MenuItem value={true}>Yes</MenuItem>
             <MenuItem value={false}>No</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth required sx={styles.dropdowns}>
+          <InputLabel id="questionType">Question Type</InputLabel>
+          <Select
+            labelId="questionType"
+            id="questionType"
+            value={info.questionType}
+            name="questionType"
+            label="questionTpe"
+            onChange={handleInfoChange}
+          >
+            {questionTypes.map((question, index) => (
+              <MenuItem key={index} value={question}>
+                {question}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>

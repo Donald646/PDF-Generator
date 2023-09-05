@@ -24,9 +24,8 @@ function App() {
     topic: "",
     length: "",
     hint: false,
+    questionType: "",
   });
-
-  //testing new remote url
 
   const handleInput = (e) => {
     setInput(e.target.value);
