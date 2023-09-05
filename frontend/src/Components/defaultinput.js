@@ -37,6 +37,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
       grade: "",
       topic: info?.topic,
       length: "",
+      hint: false,
     });
   };
 
@@ -74,7 +75,6 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
             ))}
           </Select>
         </FormControl>
-
         <FormControl fullWidth required sx={styles.dropdowns}>
           <InputLabel>Topic</InputLabel>
           <Select
@@ -92,7 +92,6 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
             ))}
           </Select>
         </FormControl>
-
         <FormControl fullWidth required sx={styles.dropdowns}>
           <InputLabel id="length">Length</InputLabel>
           <Select
@@ -110,6 +109,20 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
                 </MenuItem>
               )
             )}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth required sx={styles.dropdowns}>
+          <InputLabel id="hint">Hint</InputLabel>
+          <Select
+            labelId="hint"
+            id="hint"
+            value={info.hint}
+            name="hint"
+            label="hint"
+            onChange={handleInfoChange}
+          >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
           </Select>
         </FormControl>
       </Box>

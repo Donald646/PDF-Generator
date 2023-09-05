@@ -23,6 +23,7 @@ function App() {
     grade: "",
     topic: "",
     length: "",
+    hint: false,
   });
 
   const handleInput = (e) => {

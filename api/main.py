@@ -53,21 +53,43 @@ class PDF(Resource):
 class HandlePrompt(Resource):
     def post(self):
         data = request.get_json()
+
+        hint = ""
+
         if data['type'] == "advanced":
             content = data["prompt"]
-        else:
-            content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long."
+        elif data["hint"]:
+            hint = "Include a hint at the end of each question."
+        content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint}"
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text."},
+                # to tell the model how to return the questions
                 {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long."},
-                # if wanted to improve add more examples in the future
                 {"role": "assistant",
-                 "content": '["Simplify the expression: 3x + 2y - 4x - 7y", " Solve the equation: 5x + 7 = 22", "Expand the expression: 2(x + 3y)", "Solve the equation: 2(3x - 4) = 10x - 6", "Simplify the expression: 4(x + 2) + 3(x - 1)","Solve the equation: 2x/3 + 5 = 10", "Factorize the expression: 6x^2 - 15x.", "Solve the equation: 3(x - 4) - 2(x + 1) = 4x - 7.", "Solve the equation: 2x/5 - 1 = 3(x + 2)/10.", "Simplify the expression: 2(x - 1) - 3(2x + 1)."]'},
+                    "content": '["Simplify the expression: 3x + 2y - 4x - 7y", " Solve the equation: 5x + 7 = 22", "Expand the expression: 2(x + 3y)", "Solve the equation: 2(3x - 4) = 10x - 6", "Simplify the expression: 4(x + 2) + 3(x - 1)","Solve the equation: 2x/3 + 5 = 10", "Factorize the expression: 6x^2 - 15x.", "Solve the equation: 3(x - 4) - 2(x + 1) = 4x - 7.", "Solve the equation: 2x/5 - 1 = 3(x + 2)/10.", "Simplify the expression: 2(x - 1) - 3(2x + 1)."]'},
+                # for hints
+                {"role": "user", "content": "Generate me a math worksheet for grade 6 that is 10 questions long. Include a hint after every question. Make each type of problem a word problem."},
+                {"role": "assistant", "content": '''
+                [
+                "John has 5 red apples and 3 green apples. How many apples does he have in total? (Hint: Add the number of red apples and green apples.)",
+                "A bakery sold 48 cupcakes in the morning and 35 cupcakes in the afternoon. How many cupcakes did they sell in total? (Hint: Add the number of cupcakes sold in the morning and afternoon.)",
+                "Samantha wants to buy a toy that costs $18. She has already saved $5. How much more money does she need to buy the toy? (Hint: Subtract the amount Samantha has saved from the cost of the toy.)",
+                "There are 24 students in a class, and they need to be divided into 4 equal groups for a project. How many students will be in each group? (Hint: Divide the total number of students by the number of groups.)",
+                "A rectangle has a length of 10 inches and a width of 6 inches. What is the perimeter of the rectangle? (Hint: The perimeter of a rectangle is the sum of all its sides.)",
+                "During a week, Sarah read 20 pages of a book each day. How many pages did she read in total for the entire week? (Hint: Multiply the number of pages read each day by the number of days in a week.)",
+                "If a movie ticket costs $8, how much will it cost for a family of 4 to go to the movies? (Hint: Multiply the cost of a single ticket by the number of family members.)",
+                "There are 60 marbles in a bag, and 3/4 of them are blue. How many marbles are blue? (Hint: Find 3/4 of the total number of marbles.)",
+                "A recipe calls for 1/2 cup of sugar, but Sarah only wants to make half of the recipe. How much sugar does she need? (Hint: Multiply 1/2 cup of sugar by 1/2 to find the amount needed for half the recipe.)",
+                "A bicycle costs $150, and Mark has saved $75. How much more money does Mark need to buy the bicycle? (Hint: Subtract the amount Mark has saved from the cost of the bicycle.)",
+                ]
+                 '''},
+
                 {"role": "user", "content": content},
             ]
         )
+        print(content)
         return {"reply": response['choices'][0]['message']['content']}
 
 
