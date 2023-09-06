@@ -39,6 +39,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
       length: "",
       hint: false,
       questionType: "",
+      answerKey: false,
     });
   };
 
@@ -136,7 +137,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
             id="questionType"
             value={info.questionType}
             name="questionType"
-            label="questionTpe"
+            label="questionType"
             onChange={handleInfoChange}
           >
             {questionTypes.map((question, index) => (
@@ -144,6 +145,21 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
                 {question}
               </MenuItem>
             ))}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth required sx={styles.dropdowns}>
+          <InputLabel id="answerKey">Answer Key</InputLabel>
+          <Select
+            labelId="answerKey"
+            id="answerKey"
+            value={info.answerKey}
+            name="answerKey"
+            label="answerKey"
+            onChange={handleInfoChange}
+          >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
           </Select>
         </FormControl>
       </Box>

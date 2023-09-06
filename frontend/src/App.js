@@ -13,7 +13,7 @@ import { Switch } from "@mui/material/";
 const API_URL = "http://127.0.0.1:5000";
 function App() {
   const [input, setInput] = useState(""); //is in parent component to check for length
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState([[], []]);
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;
   const [instance, updateInstance] = usePDF({ document: MyDoc });
@@ -25,14 +25,15 @@ function App() {
     length: "",
     hint: false,
     questionType: "",
+    answerKey: false,
   });
 
   const handleInput = (e) => {
     setInput(e.target.value);
   };
 
-  const handleResponse = (textArray) => {
-    setResponse(textArray);
+  const handleResponse = (array) => {
+    setResponse(array);
   };
 
   const handleDownloadPdf = async () => {

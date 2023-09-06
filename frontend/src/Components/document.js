@@ -6,7 +6,6 @@ export const MyDocument = ({ response, info }) => {
     page: {
       display: "flex",
       flexDirection: "column",
-      backgroundColor: "#E4E4E4",
     },
     questions: {
       margin: 5,
@@ -20,19 +19,31 @@ export const MyDocument = ({ response, info }) => {
       textAlign: "center",
     },
   });
-  console.log(info);
+
   return (
     <Document title={info?.topic === "" ? "Worksheet" : info?.topic}>
       <Page style={styles.page}>
         <Text style={styles.h1}>{info?.topic}</Text>
         <View style={styles.questionContainer}>
-          {response.map((question, index) => (
+          {response[0].map((question, index) => (
             <Text wrap={false} style={styles.questions} key={index}>{`${
               index + 1
             }. ${question}`}</Text>
           ))}
         </View>
       </Page>
+      {response[1].length ? (
+        <Page styles={styles.page}>
+          <Text style={styles.h1}>Answer Key</Text>
+          <View style={styles.questionContainer}>
+            {response[1].map((answer, index) => (
+              <Text wrap={false} style={styles.questions} key={index}>{`${
+                index + 1
+              }. ${answer}`}</Text>
+            ))}
+          </View>
+        </Page>
+      ) : null}
     </Document>
   );
 };

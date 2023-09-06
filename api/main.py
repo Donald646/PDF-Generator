@@ -56,29 +56,50 @@ class HandlePrompt(Resource):
 
         hint = ""
         type = ""
+        answers = ""
+
         if data['type'] == "advanced":
             content = data["prompt"]
+        else:
+            if data["hint"]:
+                hint = "Include a hint at the end of each question."
 
-        if data["hint"]:
-            hint = "Include a hint at the end of each question."
+            if data['questionType']:
+                type = f"Make the type of problem a {data['questionType']}"
 
-        if data['questionType']:
-            type = data['questionType']
+            if data['answerKey']:
+                answers = "Include the answer key"
 
-        content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint} Make the type of problem a {type}"
-        print(content)
+        content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint} {type}. {answers}"
+
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text."},
+
                 # to tell the model how to return the questions
                 {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long."},
-                {"role": "assistant",
-                    "content": '["Simplify the expression: 3x + 2y - 4x - 7y", " Solve the equation: 5x + 7 = 22", "Expand the expression: 2(x + 3y)", "Solve the equation: 2(3x - 4) = 10x - 6", "Simplify the expression: 4(x + 2) + 3(x - 1)","Solve the equation: 2x/3 + 5 = 10", "Factorize the expression: 6x^2 - 15x.", "Solve the equation: 3(x - 4) - 2(x + 1) = 4x - 7.", "Solve the equation: 2x/5 - 1 = 3(x + 2)/10.", "Simplify the expression: 2(x - 1) - 3(2x + 1)."]'},
+                {"role": "assistant", "content": '''
+                    [
+                                ["Simplify the expression: 3x + 2y - 4x - 7y",
+                                " Solve the equation: 5x + 7 = 22", 
+                                "Expand the expression: 2(x + 3y)", 
+                                "Solve the equation: 2(3x - 4) = 10x - 6", 
+                                "Simplify the expression: 4(x + 2) + 3(x - 1)", 
+                                "Solve the equation: 2x/3 + 5 = 10", 
+                                "Factorize the expression: 6x^2 - 15x.", 
+                                "Solve the equation: 3(x - 4) - 2(x + 1) = 4x - 7.", 
+                                "Solve the equation: 2x/5 - 1 = 3(x + 2)/10.", 
+                                "Simplify the expression: 2(x - 1) - 3(2x + 1)."],
+                    []
+                    ]
+                '''},
+
                 # for hints
                 {"role": "user", "content": "Generate me a math worksheet for grade 6 that is 10 questions long. Include a hint after every question. Make each type of problem a word problem."},
                 {"role": "assistant", "content": '''
                 [
+                 [
                 "John has 5 red apples and 3 green apples. How many apples does he have in total? (Hint: Add the number of red apples and green apples.)",
                 "A bakery sold 48 cupcakes in the morning and 35 cupcakes in the afternoon. How many cupcakes did they sell in total? (Hint: Add the number of cupcakes sold in the morning and afternoon.)",
                 "Samantha wants to buy a toy that costs $18. She has already saved $5. How much more money does she need to buy the toy? (Hint: Subtract the amount Samantha has saved from the cost of the toy.)",
@@ -89,8 +110,33 @@ class HandlePrompt(Resource):
                 "There are 60 marbles in a bag, and 3/4 of them are blue. How many marbles are blue? (Hint: Find 3/4 of the total number of marbles.)",
                 "A recipe calls for 1/2 cup of sugar, but Sarah only wants to make half of the recipe. How much sugar does she need? (Hint: Multiply 1/2 cup of sugar by 1/2 to find the amount needed for half the recipe.)",
                 "A bicycle costs $150, and Mark has saved $75. How much more money does Mark need to buy the bicycle? (Hint: Subtract the amount Mark has saved from the cost of the bicycle.)",
-                ]
+                ],
+                 []
+                 ]
                  '''},
+
+                # for answer keys
+                {"role": "user", "content": "Generate me a math worksheet for grade 7 that is 5 questions long. Include a hint after every question. Make each type of problem a word problem. Include a answer key as well."},
+                {"role": "assistant", "content": '''
+                [
+                    [
+                        "Sam wants to buy a new bicycle that costs $240. He has already saved $120. How much more money does Sam need to save to buy the bicycle? (To find out how much more money Sam needs, subtract the amount he has saved from the cost of the bicycle.)",
+                        "Emily is going on a road trip. She travels 150 miles on the first day and 200 miles on the second day. How many miles has she traveled in total so far? (To find the total distance traveled, add the number of miles traveled on each day.)",
+                        "A box contains 24 chocolate bars. If Jane takes 7 chocolate bars, how many chocolate bars are left in the box? (To find out how many chocolate bars are left, subtract the number taken by Jane from the total number of chocolate bars.)",
+                        "The temperature was 58°F in the morning, and it rose to 74°F in the afternoon. What was the temperature change throughout the day? (To find the temperature change, subtract the morning temperature from the afternoon temperature.)",
+                        "Sarah is planning a party and wants to buy balloons. Each balloon costs $1.50, and she wants to buy 15 balloons. How much will Sarah spend on balloons for her party? (To calculate the total cost of balloons, multiply the cost per balloon by the number of balloons.)"
+                    ],
+
+                    [
+                        "Sam needs to save $120 more to buy the bicycle.",
+                        "Emily has traveled a total of 350 miles so far.",
+                        "There are 17 chocolate bars left in the box.",
+                        "The temperature change throughout the day was 16°F.",
+                        "Sarah will spend $22.50 on balloons for her party."
+                    ]
+                 
+                 ]
+'''},
 
                 {"role": "user", "content": content},
             ]
