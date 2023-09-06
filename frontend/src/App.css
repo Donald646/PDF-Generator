@@ -23,7 +23,7 @@
   margin: 10px;
   width: 150px;
   cursor: pointer;
-}
+} 
 
 .pdf-viewer {
   border-radius: 10px;
@@ -94,3 +94,7 @@ margin:10px;
   
 }
 
+
+.default-form {
+  text-align:center;
+}

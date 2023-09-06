@@ -59,7 +59,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
   const styles = { dropdowns: { m: 1, width: 150, marginLeft: 0 } };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="default-form">
       <Box sx={{ minWidth: 120, m: 1 }}>
         <FormControl fullWidth required sx={styles.dropdowns}>
           <InputLabel id="grade-level">Grade Level</InputLabel>
