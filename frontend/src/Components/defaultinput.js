@@ -51,8 +51,6 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
     "Algebra 1",
     "Geometry",
     "Algebra 2",
-    "Pre-Calculus",
-    "Calculus",
   ];
 
   const questionTypes = ["Word Problems", "Computational Problems"];

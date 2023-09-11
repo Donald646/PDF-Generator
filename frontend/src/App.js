@@ -9,6 +9,8 @@ import { DefaultInput } from "./Components/defaultinput";
 import { usePDF } from "@react-pdf/renderer";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Switch } from "@mui/material/";
+import { Home } from "./Components/home";
+import worksheetLogo from "./worksheetLogo.png";
 
 const API_URL = "http://127.0.0.1:5000";
 function App() {
@@ -69,21 +71,25 @@ function App() {
       <nav>
         <h1>
           <Link className="title" to="/">
-            Worksheet Wiz
+            <img src={worksheetLogo} alt="logo" className="title-img" />
           </Link>
         </h1>
         <div className="nav-bar-buttons">
-          <Link className="library-link" to="/Library">
+          <Link className="library-nav link" to="/Library">
             Library
           </Link>
-          <Link className="library-link" to="/About">
+          <Link className="about link" to="/About">
             About
+          </Link>
+          <Link className="worksheet link" to="/worksheet-generator">
+            Generator
           </Link>
         </div>
       </nav>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route
-          path="/"
+          path="/worksheet-generator"
           element={
             <>
               <ViewPDF
@@ -109,7 +115,7 @@ function App() {
                 </>
               ) : (
                 <>
-                  <span>Default</span>
+                  <span>Default (Recommended)</span>
                   <DefaultInput
                     handleResponse={handleResponse}
                     handleInfo={handleInfo}

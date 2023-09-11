@@ -10,8 +10,7 @@ import openai
 load_dotenv()
 
 # TODO:
-# Configure open ai api
-
+# None
 
 app = Flask(__name__)
 api = Api(app)
@@ -39,6 +38,7 @@ class PDF(Resource):
     @marshal_with(resource_fields)
     def get(self):
         result = PDFModel.query.all()
+
         return result, 200
 
     def post(self):
@@ -70,7 +70,7 @@ class HandlePrompt(Resource):
             if data['answerKey']:
                 answers = "Include the answer key"
 
-        content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint} {type}. {answers}"
+            content = f"Generate me a worksheet for grade {data['grade']} student, on the topic of {data['topic']}, and is {data['length']} questions long. {hint} {type}. {answers}"
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -142,6 +142,7 @@ class HandlePrompt(Resource):
             ]
         )
         print(content)
+
         return {"reply": response['choices'][0]['message']['content']}
 
 
