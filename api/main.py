@@ -137,11 +137,43 @@ class HandlePrompt(Resource):
                  
                  ]
 '''},
+                # to handle cases with no hint and no answer key
+                {"role": "user", "content": " Generate me a worksheet for grade 3 student, on the topic of Addition, and is 3 questions long.  Make the type of problem a Word Problems."},
+                {"role": "assistant", "content":
+                 '''
+                    [
+                        [
+                            "Emma had 5 candies and her friend gave her 3 more. How many candies does Emma have in total?",
+                            "There are 7 apples on the table, and 2 more apples fell from the tree. How many apples are there in total now? ",
+                            "Tom has 4 toy cars, and his brother gave him 6 more toy cars as a gift. How many toy cars does Tom have in total now? "
+                        ],
+                        []
+                    ]
+                '''
+
+                 },
+                {"role": "user", "content": "Generate me a worksheet for grade 4 student, on the topic of Subtraction, and is 4 questions long. Include a hint at the end of each question. Make the type of problem a Word Problems."},
+                {"role": "assistant", "content":
+                 '''
+
+
+                    [
+                        [
+                            "Sara had 12 pencils, but she lost 5 of them. How many pencils does Sara have now? (Hint: To find the answer, subtract the number of lost pencils from the initial number of pencils.)",
+                            "There were 20 birds perched on a tree branch. 8 of them flew away. How many birds are left on the branch? (Hint: To find the answer, subtract the number of birds that flew away from the initial number of birds.)",
+                            "Lucy had 36 stickers, and she gave 14 of them to her friend. How many stickers does Lucy have left? (Hint: To find the answer, subtract the number of stickers given to the friend from the initial number of stickers.)",
+                            "A store had 50 cookies. Some customers bought 22 cookies. How many cookies are still in the store? (Hint: To find the answer, subtract the number of cookies bought by the customers from the initial number of cookies.)"
+                        ],
+                        []
+                    ]
+                '''
+                 },
 
                 {"role": "user", "content": content},
             ]
         )
         print(content)
+        print(response['choices'][0]['message']['content'])
 
         return {"reply": response['choices'][0]['message']['content']}
 

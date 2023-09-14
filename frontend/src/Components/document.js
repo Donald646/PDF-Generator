@@ -6,6 +6,7 @@ export const MyDocument = ({ response, info }) => {
     page: {
       display: "flex",
       flexDirection: "column",
+      padding: 20,
     },
     questions: {
       margin: 5,
@@ -18,11 +19,35 @@ export const MyDocument = ({ response, info }) => {
       fontSize: 20,
       textAlign: "center",
     },
+    header: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      // Add other styles for the header here
+    },
+    studentInfo: {
+      textAlign: "center",
+      fontSize: 10,
+      margin: 5,
+    },
+    leftHeader: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+    },
   });
 
   return (
     <Document title={info?.topic === "" ? "Worksheet" : info?.topic}>
       <Page style={styles.page}>
+        <View style={styles.header}>
+          <Text style={styles.studentInfo}>Name: _______________</Text>
+          <View style={styles.leftHeader}>
+            <Text style={styles.studentInfo}>Period: ____</Text>
+            <Text style={styles.studentInfo}>Date: ______</Text>
+          </View>
+        </View>
         <Text style={styles.h1}>{info?.topic}</Text>
         <View style={styles.questionContainer}>
           {response[0].map((question, index) => (
