@@ -109,9 +109,13 @@ nav {
 
 }
 
-.page1 h2{
+.home-page1 h2{
   color: rgb(24, 27, 149);
   
+}
+
+.about-page {
+  text-align: center;
 }
 
 
