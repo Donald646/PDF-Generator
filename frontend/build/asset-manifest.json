@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.4388017b.css",
-    "main.js": "/static/js/main.06ea9b94.js",
+    "main.js": "/static/js/main.8497f899.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/worksheetLogo.png": "/static/media/worksheetLogo.2723a830923e72901221.png",
     "index.html": "/index.html",
     "main.4388017b.css.map": "/static/css/main.4388017b.css.map",
-    "main.06ea9b94.js.map": "/static/js/main.06ea9b94.js.map",
+    "main.8497f899.js.map": "/static/js/main.8497f899.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4388017b.css",
-    "static/js/main.06ea9b94.js"
+    "static/js/main.8497f899.js"
   ]
 }

@@ -56,6 +56,7 @@ function App() {
       body: JSON.stringify(jsonData),
     });
     console.log("Download Succesfully");
+    console.log(request);
   };
 
   const handleAdvanced = () => {
