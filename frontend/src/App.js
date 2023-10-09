@@ -1,5 +1,5 @@
 import "./App.css";
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { MyDocument } from "./Components/document";
 import { PromptInput } from "./Components/promptinput";
 import { LibraryPage } from "./Components/library";
@@ -18,7 +18,7 @@ function App() {
   const [response, setResponse] = useState([[], []]);
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;
-  const [instance, updateInstance] = usePDF({ document: MyDoc });
+  const [instance] = usePDF({ document: MyDoc });
   const [advancedMode, setAdvancedMode] = useState(false);
   const [info, setInfo] = useState({
     type: "default",
