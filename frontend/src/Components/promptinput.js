@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = "https://shielded-refuge-96333-dd1d10ecd43a.herokuapp.com";
 // send get request to backend to get the answer to the prompt from GPT
 
 // TODO:

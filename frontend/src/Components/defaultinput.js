@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = "https://shielded-refuge-96333-dd1d10ecd43a.herokuapp.com/";
 
 export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
   const [isDisabled, setIsDisabled] = useState(false);
