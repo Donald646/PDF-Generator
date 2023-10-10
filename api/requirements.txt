@@ -1,4 +1,4 @@
-Flask==3.1.1
+Flask==2.1.1
 Flask-RESTful==0.3.10
 Flask-SQLAlchemy==2.5.1
 Flask-CORS==3.1.1
