@@ -51,6 +51,9 @@ class PDF(Resource):
 
 
 class HandlePrompt(Resource):
+    def get(self):
+        return {"messages": "successful"}, 200
+
     def post(self):
         data = request.get_json()
 
