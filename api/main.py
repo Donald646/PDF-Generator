@@ -17,7 +17,7 @@ api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 API_KEY = os.environ.get('API_KEY')
-openai.api_key = GPT_API_KEY
+openai.api_key = API_KEY
 CORS(app)
 
 
