@@ -16,7 +16,7 @@ app = Flask(__name__)
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-GPT_API_KEY = os.getenv("API_KEY")
+API_KEY = os.environ.get('API_KEY')
 openai.api_key = GPT_API_KEY
 CORS(app)
 

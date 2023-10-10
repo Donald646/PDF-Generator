@@ -33,6 +33,7 @@ export const PromptInput = ({
     const data = await response.json();
 
     handleResponse(JSON.parse(data.reply));
+    console.log(data.reply);
     setIsLoading(false);
     setInput("");
   };
