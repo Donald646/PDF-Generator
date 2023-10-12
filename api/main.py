@@ -60,12 +60,14 @@ class HandlePrompt(Resource):
         hint = ""
         type = ""
         answers = ""
-
+        print(data)
         if data['type'] == "advanced":
             content = data["prompt"]
         else:
             if data["hint"]:
                 hint = "Include a hint at the end of each question."
+            else:
+                hint = 'Do not include a hint.'
 
             if data['questionType']:
                 type = f"Make the type of problem a {data['questionType']}"
@@ -78,7 +80,7 @@ class HandlePrompt(Resource):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text."},
+                {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text. Use the passed in chats as a basis on what to return depending on certain prompts and how to return them. Do not memorize the questions and give out the exact same imput"},
 
                 # to tell the model how to return the questions
                 {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long."},
@@ -141,7 +143,7 @@ class HandlePrompt(Resource):
                  ]
 '''},
                 # to handle cases with no hint and no answer key
-                {"role": "user", "content": " Generate me a worksheet for grade 3 student, on the topic of Addition, and is 3 questions long.  Make the type of problem a Word Problems."},
+                {"role": "user", "content": " Generate me a worksheet for grade 3 student, on the topic of Addition, and is 3 questions long. Make the type of problem a Word Problems. Do not include a hint."},
                 {"role": "assistant", "content":
                  '''
                     [
