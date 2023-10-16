@@ -1,7 +1,7 @@
 import { React } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
 
 export const DefaultInput = ({
   handleResponse,

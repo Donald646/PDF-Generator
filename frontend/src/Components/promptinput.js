@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
 // send get request to backend to get the answer to the prompt from GPT
 
 // TODO:
@@ -19,6 +19,7 @@ export const PromptInput = ({
     if (input.trim() === "") {
       return alert("Enter something");
     }
+
     const jsonData = {
       type: "advanced",
       prompt: input,
