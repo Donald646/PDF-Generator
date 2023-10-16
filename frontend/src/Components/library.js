@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 
-const API_URL = "https://shielded-refuge-96333-dd1d10ecd43a.herokuapp.com";
+const API_URL = process.env.REACT_APP_API_URL;
 export const LibraryPage = () => {
   const [documentData, setDocumentData] = useState([]);
   useEffect(() => {

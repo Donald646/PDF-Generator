@@ -1,7 +1,7 @@
 import { React } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
-const API_URL = "https://shielded-refuge-96333-dd1d10ecd43a.herokuapp.com";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const DefaultInput = ({
   handleResponse,

@@ -12,7 +12,7 @@ import { Switch } from "@mui/material/";
 import { Home } from "./Components/home";
 import worksheetLogo from "./worksheetLogo.png";
 
-const API_URL = "https://shielded-refuge-96333-dd1d10ecd43a.herokuapp.com";
+const API_URL = process.env.REACT_APP_API_URL;
 function App() {
   const [input, setInput] = useState(""); //is in parent component to check for length
   const [response, setResponse] = useState([[], []]);
