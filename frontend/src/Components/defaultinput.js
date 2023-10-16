@@ -1,13 +1,18 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
 const API_URL = "https://shielded-refuge-96333-dd1d10ecd43a.herokuapp.com";
 
-export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
-  const [isDisabled, setIsDisabled] = useState(false);
+export const DefaultInput = ({
+  handleResponse,
+  info,
+  handleInfo,
+  isLoading,
+  setIsLoading,
+}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsDisabled(true);
+    setIsLoading(true);
 
     const response = await fetch(`${API_URL}/handle-prompt`, {
       method: "POST",
@@ -20,7 +25,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
     console.log(data);
     handleResponse(JSON.parse(data.reply));
     resetInfo();
-    setIsDisabled(false);
+    setIsLoading(false);
   };
 
   const handleInfoChange = (event) => {
@@ -164,9 +169,9 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
       <button
         type="submit"
         className="all-buttons default-generate-button"
-        disabled={isDisabled}
+        disabled={isLoading}
         style={
-          isDisabled ? { backgroundColor: "gray", cursor: "not-allowed" } : null
+          isLoading ? { backgroundColor: "gray", cursor: "not-allowed" } : null
         }
       >
         Generate

@@ -20,6 +20,7 @@ function App() {
   const MyDoc = <MyDocument response={response} />;
   const [instance] = usePDF({ document: MyDoc });
   const [advancedMode, setAdvancedMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [info, setInfo] = useState({
     type: "default",
     grade: "",
@@ -75,13 +76,15 @@ function App() {
             <img src={worksheetLogo} alt="logo" className="title-img" />
           </Link>
         </h1>
-        <div className="nav-bar-buttons">
-          <Link className="library-nav link" to="/Library">
+        {/* 
+        <Link className="library-nav link" to="/Library">
             Library
           </Link>
-          <Link className="about link" to="/About">
+        <Link className="about link" to="/About">
             About
           </Link>
+        */}
+        <div className="nav-bar-buttons">
           <Link className="worksheet link" to="/worksheet-generator">
             Generator
           </Link>
@@ -121,6 +124,8 @@ function App() {
                     handleResponse={handleResponse}
                     handleInfo={handleInfo}
                     info={info}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
                   />
                 </>
               )}
