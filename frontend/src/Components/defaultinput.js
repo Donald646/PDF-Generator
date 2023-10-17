@@ -1,15 +1,10 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
 const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
 
-export const DefaultInput = ({
-  handleResponse,
-  info,
-  handleInfo,
-  isLoading,
-  setIsLoading,
-}) => {
+export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);

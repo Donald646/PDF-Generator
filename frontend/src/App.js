@@ -20,7 +20,7 @@ function App() {
   const MyDoc = <MyDocument response={response} />;
   const [instance] = usePDF({ document: MyDoc });
   const [advancedMode, setAdvancedMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
   const [info, setInfo] = useState({
     type: "default",
     grade: "",
@@ -96,11 +96,14 @@ function App() {
           path="/worksheet-generator"
           element={
             <>
-              <ViewPDF
-                handleDownloadPdf={handleDownloadPdf}
-                response={response}
-                info={info}
-              />
+              {response[0].length !== 0 ? (
+                <ViewPDF
+                  handleDownloadPdf={handleDownloadPdf}
+                  response={response}
+                  info={info}
+                />
+              ) : null}
+
               <Switch
                 checked={advancedMode}
                 onChange={handleAdvanced}
@@ -124,8 +127,6 @@ function App() {
                     handleResponse={handleResponse}
                     handleInfo={handleInfo}
                     info={info}
-                    isLoading={isLoading}
-                    setIsLoading={setIsLoading}
                   />
                 </>
               )}

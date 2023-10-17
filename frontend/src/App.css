@@ -1,5 +1,7 @@
 body {
   background-color: #c5e5fa;
+
+margin:0;
 }
 
 
@@ -117,6 +119,11 @@ nav {
 .about-page {
   text-align: center;
 }
+
+
+
+
+
 
 
 
