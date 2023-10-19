@@ -13,8 +13,10 @@ import { Home } from "./Components/home";
 import worksheetLogo from "./worksheetLogo.png";
 
 const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
+//const API_URL = "http://127.0.0.1:5000";
+
 function App() {
-  const [input, setInput] = useState(""); //is in parent component to check for length
+  const [input, setInput] = useState(""); //is in parent component to check for length of prompt
   const [response, setResponse] = useState([[], []]);
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;

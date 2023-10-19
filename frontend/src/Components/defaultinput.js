@@ -2,11 +2,14 @@ import { React, useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
 const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
+//const API_URL = "http://127.0.0.1:5000";
 
 export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(info);
+
     setIsLoading(true);
 
     const response = await fetch(`${API_URL}/handle-prompt`, {
@@ -31,6 +34,23 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
     }));
   };
 
+  const randomElement = (array) => {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
+  };
+  // for I'm Feeling Lucky button
+  const randomGenerator = () => {
+    handleInfo({
+      type: "default",
+      grade: randomElement(gradeLevels),
+      topic: randomElement(topics),
+      length: randomElement(Array.from({ length: 5 }, (_, index) => index + 1)),
+      hint: false,
+      questionType: randomElement(questionTypes),
+      answerKey: false,
+    });
+  };
+
   const resetInfo = () => {
     handleInfo({
       type: "default",
@@ -53,6 +73,8 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
     "Algebra 2",
   ];
 
+  const gradeLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
   const questionTypes = ["Word Problems", "Computational Problems"];
 
   const styles = { dropdowns: { m: 1, width: 150, marginLeft: 0 } };
@@ -70,7 +92,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
             label="grade"
             onChange={handleInfoChange}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((grade) => (
+            {gradeLevels.map((grade) => (
               <MenuItem key={grade} value={grade}>
                 {grade}
               </MenuItem>
@@ -161,6 +183,17 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
           </Select>
         </FormControl>
       </Box>
+      <button
+        type="submit"
+        className="all-buttons lucky-generate-button"
+        disabled={isLoading}
+        style={
+          isLoading ? { backgroundColor: "gray", cursor: "not-allowed" } : null
+        }
+        onClick={randomGenerator}
+      >
+        I'm Feeling Lucky
+      </button>
       <button
         type="submit"
         className="all-buttons default-generate-button"
