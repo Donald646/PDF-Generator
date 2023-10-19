@@ -56,7 +56,6 @@ class HandlePrompt(Resource):
 
     def post(self):
         data = request.get_json()
-
         hint = ""
         type = ""
         answers = ""
