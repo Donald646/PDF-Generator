@@ -80,7 +80,7 @@ class HandlePrompt(Resource):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text. Use the passed in chats as a basis on what to return depending on certain prompts and how to return them. Do not memorize the questions and give out the exact same imput"},
+                {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text. Use the passed in chats as a basis on what to return depending on certain prompts and how to return them. Do not memorize the questions and give out the exact same imput. Generate the worksheet even if the grade level and topic is conflicting"},
 
                 # to tell the model how to return the questions
                 {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long."},
@@ -190,5 +190,6 @@ api.add_resource(HandlePrompt, "/handle-prompt")
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    port = int(os.getenv('PORT'))
+    port = int(os.getenv('PORT'))  # <<< for heroku
+    # add a second parameter of port=port to run on heroku again
     app.run(debug=True, port=port)
