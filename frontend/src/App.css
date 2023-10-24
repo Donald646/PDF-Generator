@@ -1,12 +1,13 @@
 body {
   background-color: #c5e5fa;
 
-margin:0;
+
 }
 
 
 .prompt-container {
   text-align: center;
+  padding: 10px;
 }
 
 
@@ -17,7 +18,7 @@ margin:0;
   border-radius: 10px;
   border-width: 3px;
   border-color: black;
-  margin:0px;
+ 
   box-sizing: border-box;
 }
 .all-buttons {

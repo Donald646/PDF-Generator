@@ -189,6 +189,6 @@ api.add_resource(HandlePrompt, "/handle-prompt")
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    port = int(os.getenv('PORT'))  # <<< for heroku
+   # port = int(os.getenv('PORT'))  # <<< for heroku
     # add a second parameter of port=port to run on heroku again
-    app.run(debug=True, port=port)
+    app.run(debug=True)

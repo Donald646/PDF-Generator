@@ -16,7 +16,7 @@ const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
 //const API_URL = "http://127.0.0.1:5000";
 
 function App() {
-  const [input, setInput] = useState(""); //is in parent component to check for length of prompt
+  //is in parent component to check for length of prompt
   const [response, setResponse] = useState([[], []]);
   const [url, setURL] = useState("");
   const MyDoc = <MyDocument response={response} />;
@@ -33,18 +33,11 @@ function App() {
     answerKey: false,
   });
 
-  const handleInput = (e) => {
-    setInput(e.target.value);
-  };
-
   const handleResponse = (array) => {
     setResponse(array);
   };
 
   const handleDownloadPdf = async () => {
-    if (input.length === 0) {
-      return alert("Enter a prompt");
-    }
     setURL(instance.url);
     const jsonData = {
       file_name: "idk.pdf",
@@ -115,12 +108,7 @@ function App() {
               {advancedMode ? (
                 <>
                   <span>Advanced</span>
-                  <PromptInput
-                    input={input}
-                    handleInput={handleInput}
-                    handleResponse={handleResponse}
-                    setInput={setInput}
-                  />
+                  <PromptInput handleResponse={handleResponse} />
                 </>
               ) : (
                 <>

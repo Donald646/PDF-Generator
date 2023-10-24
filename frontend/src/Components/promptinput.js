@@ -6,13 +6,13 @@ const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
 // TODO:
 // work on handleSubmit
 
-export const PromptInput = ({
-  handleInput,
-  input,
-  handleResponse,
-  setInput,
-}) => {
+export const PromptInput = ({ handleResponse }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [input, setInput] = useState("");
+
+  const handleInput = (e) => {
+    setInput(e.target.value);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);

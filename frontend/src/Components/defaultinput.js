@@ -77,7 +77,9 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
 
   const questionTypes = ["Word Problems", "Computational Problems"];
 
-  const styles = { dropdowns: { m: 1, width: 150, marginLeft: 0 } };
+  const styles = {
+    dropdowns: { m: 1, width: 150, marginLeft: 0, borderRadius: 1 },
+  };
 
   return (
     <form onSubmit={handleSubmit} className="default-form">
