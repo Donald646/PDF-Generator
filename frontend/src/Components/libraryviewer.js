@@ -25,10 +25,3 @@ export default function LibraryViewer() {
     </PDFViewer>
   );
 }
-{
-  /*
-    <PDFViewer>
-        <MyDocument response={documentData} />
-      </PDFViewer>
-    */
-}
