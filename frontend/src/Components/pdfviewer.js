@@ -1,7 +1,20 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { MyDocument } from "./document";
 import { PDFViewer } from "@react-pdf/renderer";
-export const ViewPDF = ({ handleDownloadPdf, response, info }) => {
+
+export const ViewPDF = ({ response, info }) => {
+  const [fileName, setFileName] = useState("");
+
+  const handleFileName = (e) => {
+    setFileName(e.target.value);
+  };
+  const handleDownloadPdf = async () => {
+    if (fileName.length === 0) {
+      alert("Enter a File Name Before Saving");
+    } else {
+      localStorage.setItem(fileName, JSON.stringify(response));
+    }
+  };
   return (
     <div className="pdf-container">
       <PDFViewer
@@ -12,9 +25,17 @@ export const ViewPDF = ({ handleDownloadPdf, response, info }) => {
       >
         <MyDocument response={response} info={info} />
       </PDFViewer>
+
       <button className="all-buttons save-button" onClick={handleDownloadPdf}>
         Save to Library
       </button>
+      <input
+        type="text"
+        placeholder="File Name"
+        className="file-name"
+        value={fileName}
+        onChange={handleFileName}
+      />
     </div>
   );
 };

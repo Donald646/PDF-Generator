@@ -1,6 +1,6 @@
 body {
-  background-color: #c5e5fa;
-
+  /*background-color: #c5e5fa;*/
+background-color: rgb(255, 255, 255)
 
 }
 
@@ -18,7 +18,6 @@ body {
   border-radius: 10px;
   border-width: 3px;
   border-color: black;
- 
   box-sizing: border-box;
 }
 .all-buttons {
@@ -122,8 +121,10 @@ nav {
   text-align: center;
 }
 
-
-
+.file-name{
+  height: 30px;
+  border-radius: 10px;
+}
 
 
 
