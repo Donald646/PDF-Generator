@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -17,26 +17,33 @@ import { Link } from "react-router-dom";
 //const API_URL = "http://127.0.0.1:5000";
 
 export const LibraryPage = () => {
-  const handleDelete = () => {};
-
-  const getAllKeys = () => {
-    const localStorageKeys = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key === "debug") {
-        //pass
-      } else {
-        localStorageKeys.push(key);
-      }
-    }
-    return localStorageKeys;
+  const [storageKeys, setStorageKeys] = useState([]);
+  const handleDelete = (key) => {
+    localStorage.removeItem(key);
   };
+  useEffect(() => {
+    const getAllKeys = () => {
+      const localStorageKeys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key === "debug") {
+          //pass
+        } else {
+          localStorageKeys.push(key);
+        }
+      }
+
+      setStorageKeys(localStorageKeys);
+      console.log(storageKeys);
+    };
+    getAllKeys();
+  }, [storageKeys]);
 
   const styles = { iconButtons: { m: 2 } };
 
   return (
     <List dense={false}>
-      {getAllKeys().map((key) => (
+      {storageKeys.map((key, index) => (
         <ListItem
           secondaryAction={
             <div>
@@ -54,15 +61,14 @@ export const LibraryPage = () => {
               <IconButton
                 edge="end"
                 aria-label="delete"
-                onClick={handleDelete}
+                onClick={() => handleDelete(key)}
                 className="icon-button delete"
-                sx={styles.iconButtons}
               >
                 <DeleteIcon />
               </IconButton>
             </div>
           }
-          key={key}
+          key={index}
         >
           <ListItemAvatar>
             <Avatar>
