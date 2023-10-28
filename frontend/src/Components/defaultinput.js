@@ -1,16 +1,21 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 
 const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
 //const API_URL = "http://127.0.0.1:5000";
 
-export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
-  const [isLoading, setIsLoading] = useState(false);
+export const DefaultInput = ({
+  handleResponse,
+  info,
+  handleInfo,
+  isLoading,
+  handleLoading,
+}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(info);
 
-    setIsLoading(true);
+    handleLoading(true);
 
     const response = await fetch(`${API_URL}/handle-prompt`, {
       method: "POST",
@@ -23,7 +28,7 @@ export const DefaultInput = ({ handleResponse, info, handleInfo }) => {
     console.log(data);
     handleResponse(JSON.parse(data.reply));
     resetInfo();
-    setIsLoading(false);
+    handleLoading(false);
   };
 
   const handleInfoChange = (event) => {

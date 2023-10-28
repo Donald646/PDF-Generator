@@ -121,9 +121,16 @@ nav {
   text-align: center;
 }
 
-.file-name{
+.file-name-input{
   height: 30px;
   border-radius: 10px;
+
+
+}
+
+.successfully-saved-text{
+  color:green;
+  margin: 5px;
 }
 
 

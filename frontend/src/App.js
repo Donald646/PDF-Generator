@@ -6,7 +6,8 @@ import { LibraryPage } from "./Components/library";
 import { ViewPDF } from "./Components/pdfviewer";
 import { AboutPage } from "./Components/about";
 import { DefaultInput } from "./Components/defaultinput";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Switch } from "@mui/material/";
 import { Home } from "./Components/home";
@@ -19,7 +20,7 @@ import LibraryViewer from "./Components/libraryviewer";
 function App() {
   //is in parent component to check for length of prompt
   const [response, setResponse] = useState([[], []]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [advancedMode, setAdvancedMode] = useState(false);
 
   const [info, setInfo] = useState({
@@ -42,6 +43,10 @@ function App() {
 
   const handleInfo = (object) => {
     setInfo(object);
+  };
+
+  const handleLoading = (value) => {
+    setIsLoading(value);
   };
 
   return (
@@ -74,6 +79,17 @@ function App() {
             <>
               {response[0].length !== 0 ? (
                 <ViewPDF response={response} info={info} />
+              ) : isLoading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "500px",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
               ) : null}
 
               <Switch
@@ -94,6 +110,8 @@ function App() {
                     handleResponse={handleResponse}
                     handleInfo={handleInfo}
                     info={info}
+                    isLoading={isLoading}
+                    handleLoading={handleLoading}
                   />
                 </>
               )}
