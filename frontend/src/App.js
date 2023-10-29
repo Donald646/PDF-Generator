@@ -22,7 +22,6 @@ function App() {
   //is in parent component to check for length of prompt
   const [response, setResponse] = useState([[], []]);
   const [isLoading, setIsLoading] = useState(false);
-  const [advancedMode, setAdvancedMode] = useState(false);
 
   const [info, setInfo] = useState({
     type: "default",
@@ -36,10 +35,6 @@ function App() {
 
   const handleResponse = (array) => {
     setResponse(array);
-  };
-
-  const handleAdvanced = () => {
-    setAdvancedMode(!advancedMode);
   };
 
   const handleInfo = (object) => {
@@ -93,29 +88,15 @@ function App() {
                 </Box>
               ) : null}
 
-              <Switch
-                checked={advancedMode}
-                onChange={handleAdvanced}
-                inputProps={{ "aria-label": "controlled" }}
-                name="Advanced Mode"
-              />
-              {advancedMode ? (
-                <>
-                  <span>Advanced</span>
-                  <PromptInput handleResponse={handleResponse} />
-                </>
-              ) : (
-                <>
-                  <span>Default (Recommended)</span>
-                  <DefaultInput
-                    handleResponse={handleResponse}
-                    handleInfo={handleInfo}
-                    info={info}
-                    isLoading={isLoading}
-                    handleLoading={handleLoading}
-                  />
-                </>
-              )}
+              <>
+                <DefaultInput
+                  handleResponse={handleResponse}
+                  handleInfo={handleInfo}
+                  info={info}
+                  isLoading={isLoading}
+                  handleLoading={handleLoading}
+                />
+              </>
             </>
           }
         />

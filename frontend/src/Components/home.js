@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import homePDF from "./homePDF.png";
+//import { Box, CircularProgress } from "@mui/material/";
+import homePDF from "./homePDF2.png";
 
 export const Home = () => {
   return (
@@ -21,7 +22,7 @@ export const Home = () => {
           className="homePdf-img"
           src={homePDF}
           alt="pdf"
-          style={{ width: "100%", height: "auto" }}
+          style={{ width: "750px", height: "100", borderRadius: "20px" }}
         />
       </div>
     </div>
