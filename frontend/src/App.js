@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Switch } from "@mui/material/";
 import { Home } from "./Components/home";
 import worksheetLogo from "./worksheetLogo.png";
+
 import LibraryViewer from "./Components/libraryviewer";
 
 //const API_URL = "https://worksheetcreator-32445e06bf4d.herokuapp.com";
@@ -61,14 +62,14 @@ function App() {
           <Link className="library-nav link" to="/Library">
             Library
           </Link>
+          <Link className=" link" to="/worksheet-generator">
+            Generator
+          </Link>
           {/*
         <Link className="about link" to="/About">
           About
         </Link>
         */}
-          <Link className="worksheet link" to="/worksheet-generator">
-            Generator
-          </Link>
         </div>
       </nav>
       <Routes>

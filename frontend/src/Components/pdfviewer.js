@@ -35,7 +35,7 @@ export const ViewPDF = ({ response, info }) => {
       <PDFViewer
         className="pdf-viewer"
         width="100%"
-        height="650"
+        height="750"
         showToolbar={true}
       >
         <MyDocument response={response} info={info} />
