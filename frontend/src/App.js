@@ -62,7 +62,7 @@ function App() {
           <Link className="library-nav link" to="/Library">
             Library
           </Link>
-          <Link className=" link" to="/worksheet-generator">
+          <Link className="generator link" to="/worksheet-generator">
             Generator
           </Link>
           {/*

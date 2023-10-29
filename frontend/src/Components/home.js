@@ -9,7 +9,7 @@ export const Home = () => {
       <div className="home-page1">
         <h2>Create Completely Customized Worksheets In Seconds</h2>
         <h1>Customized Worksheets, Generated With AI.</h1>
-        <Link className="home-nav link" to="/worksheet-generator">
+        <Link className="home-nav" to="/worksheet-generator">
           Try It Now{" "}
           <span>
             <ExitToAppIcon className="exit-icon" />
