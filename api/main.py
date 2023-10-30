@@ -82,7 +82,7 @@ class HandlePrompt(Resource):
                 {"role": "system", "content": "You are a worksheet generator. You will generate math worksheets with the following: grade level, topic, and the length of the worksheet. Return the questions in a list and only return the questions no extra text. Use the passed in chats as a basis on what to return depending on certain prompts and how to return them. Do not memorize the questions and give out the exact same imput. Generate the worksheet even if the grade level and topic is conflicting"},
 
                 # to tell the model how to return the questions
-                {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long."},
+                {"role": "user", "content": "Generate me a worksheet for 7th graders on the topic of Algebra 1, that is 10 questions long. Make each type of problem a computational problem."},
                 {"role": "assistant", "content": '''
                     [
                                 ["Simplify the expression: 3x + 2y - 4x - 7y",
@@ -172,6 +172,16 @@ class HandlePrompt(Resource):
                     ]
                 '''
                  },
+                {"role": "user", "content": "Generate me a worksheet for grade 2 student, on the topic of Subtraction, and is 5 questions long. Include a hint at the end of each question. Make the type of problems computational ."},
+                {"role": "assistant", "content": '''
+                 [[
+                    "12 - 5 = _____ (Count backward from 12 to 5)",
+                    "18 - 7 = _____ (Start at 18 and subtract 7)",
+                    "14 - 6 = _____ (Take away 6 from 14)",
+                    "9 - 3 = _____ (Subtract 3 from 9)",
+                    "22 - 10 = _____ (Find the difference between 22 and 10)"
+                    ], []]
+                 '''},
 
                 {"role": "user", "content": content},
             ]
