@@ -38,12 +38,13 @@ export const DefaultInput = ({
       [name]: value,
     }));
   };
-
+  /*
   const randomElement = (array) => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
   };
-  // for I'm Feeling Lucky button
+
+
   const randomGenerator = () => {
     handleInfo({
       type: "default",
@@ -55,7 +56,7 @@ export const DefaultInput = ({
       answerKey: false,
     });
   };
-
+*/
   const resetInfo = () => {
     handleInfo({
       type: "default",
