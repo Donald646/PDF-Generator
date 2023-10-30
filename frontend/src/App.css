@@ -110,6 +110,7 @@ nav {
 .home-nav {
   width: 300px;
   font-size: 30px;
+  padding:10px;
 }
 
 
@@ -129,12 +130,13 @@ nav {
   text-align: center;
   color:rgb(40, 40, 255);
   font-family: sans-serif;
-  display:flex;
+
+
 }
 
 .home-page1{
-  flex-grow:1;
-  flex-basis: 0;
+
+
   text-align: center;
   
 }
@@ -142,12 +144,12 @@ nav {
 .home-page1 h1{
   font-size: 50px;
   margin: 0;
-  margin-bottom: 100px;
+  margin-bottom: 75px;
 }
 
 
 .home-page1 h2{
-
+  
   color: rgb(24, 27, 149);
   font-size: 20px;
   border-radius: 10px;
@@ -156,10 +158,7 @@ nav {
 
 }
 
-.home-page2{
-  flex-basis:0;
-  flex-grow:1;
-}
+
 
 .about-page {
   text-align: center;

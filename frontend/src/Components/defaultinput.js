@@ -190,7 +190,8 @@ export const DefaultInput = ({
           </Select>
         </FormControl>
       </Box>
-      <button
+      {/*
+<button
         type="submit"
         className="all-buttons lucky-generate-button"
         disabled={isLoading}
@@ -201,6 +202,8 @@ export const DefaultInput = ({
       >
         I'm Feeling Lucky
       </button>
+            */}
+
       <button
         type="submit"
         className="all-buttons default-generate-button"

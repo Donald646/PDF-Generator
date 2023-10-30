@@ -22,6 +22,7 @@ function App() {
   //is in parent component to check for length of prompt
   const [response, setResponse] = useState([[], []]);
   const [isLoading, setIsLoading] = useState(false);
+  const [advancedMode, setAdvancedMode] = useState(false);
 
   const [info, setInfo] = useState({
     type: "default",
@@ -35,6 +36,10 @@ function App() {
 
   const handleResponse = (array) => {
     setResponse(array);
+  };
+
+  const handleAdvanced = () => {
+    setAdvancedMode(!advancedMode);
   };
 
   const handleInfo = (object) => {
@@ -57,7 +62,7 @@ function App() {
           <Link className="library-nav link" to="/Library">
             Library
           </Link>
-          <Link className="generator link" to="/worksheet-generator">
+          <Link className="link" to="/worksheet-generator">
             Generator
           </Link>
           {/*
@@ -88,15 +93,29 @@ function App() {
                 </Box>
               ) : null}
 
-              <>
-                <DefaultInput
-                  handleResponse={handleResponse}
-                  handleInfo={handleInfo}
-                  info={info}
-                  isLoading={isLoading}
-                  handleLoading={handleLoading}
-                />
-              </>
+              <Switch
+                checked={advancedMode}
+                onChange={handleAdvanced}
+                inputProps={{ "aria-label": "controlled" }}
+                name="Advanced Mode"
+              />
+              {advancedMode ? (
+                <>
+                  <span>Advanced</span>
+                  <PromptInput handleResponse={handleResponse} />
+                </>
+              ) : (
+                <>
+                  <span>Default (Recommended)</span>
+                  <DefaultInput
+                    handleResponse={handleResponse}
+                    handleInfo={handleInfo}
+                    info={info}
+                    isLoading={isLoading}
+                    handleLoading={handleLoading}
+                  />
+                </>
+              )}
             </>
           }
         />
