@@ -159,8 +159,6 @@ class HandlePrompt(Resource):
                 {"role": "user", "content": "Generate me a worksheet for grade 4 student, on the topic of Subtraction, and is 4 questions long. Include a hint at the end of each question. Make the type of problem a Word Problems."},
                 {"role": "assistant", "content":
                  '''
-
-
                     [
                         [
                             "Sara had 12 pencils, but she lost 5 of them. How many pencils does Sara have now? (Hint: To find the answer, subtract the number of lost pencils from the initial number of pencils.)",
@@ -185,16 +183,16 @@ class HandlePrompt(Resource):
                 {"role": "user", "content": "GGenerate me a worksheet for grade 5 student, on the topic of Subtraction, and is 4 questions long. Include a hint at the end of each question. Make the type of problems computational. Include a answer key."},
                 {"role": "assistant", "content": '''
                  [[
-                    '25 - 12 =',
-                    '48 - 17 =',
-                    '73 - 28 =',
-                    '56 - 39 =',
+                    '25 - 12 = ___ (Start by subtracting the ones place, then the tens place.)' ,
+                    '48 - 17 = ___ (Take away 7 from 8 in the ones place and 1 from 4 in the tens place.)',
+                    '73 - 28 = ___ (Subtract the ones place first and then the tens place.)',
+                    '56 - 39 = ___ (Remember to borrow when needed for the ones place subtraction.)',
                     ], 
                  [
-                    25 - 12,
-                    48 - 17,
-                    73 - 28,
-                    56 - 39,
+                    "13",
+                    "31",
+                    "45",
+                    "17",
                     ]]
                  '''},
 
