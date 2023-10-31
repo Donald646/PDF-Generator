@@ -182,6 +182,21 @@ class HandlePrompt(Resource):
                     "22 - 10 = _____ (Find the difference between 22 and 10)"
                     ], []]
                  '''},
+                {"role": "user", "content": "GGenerate me a worksheet for grade 5 student, on the topic of Subtraction, and is 4 questions long. Include a hint at the end of each question. Make the type of problems computational. Include a answer key."},
+                {"role": "assistant", "content": '''
+                 [[
+                    '25 - 12 =',
+                    '48 - 17 =',
+                    '73 - 28 =',
+                    '56 - 39 =',
+                    ], 
+                 [
+                    25 - 12,
+                    48 - 17,
+                    73 - 28,
+                    56 - 39,
+                    ]]
+                 '''},
 
                 {"role": "user", "content": content},
             ]
