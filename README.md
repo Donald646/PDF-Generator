@@ -1,4 +1,5 @@
 # Worksheet-Wiz
+An app that generates math worksheets based on user inputs.
 
 # Dependencies
 
@@ -8,5 +9,4 @@
 - Flask SQL Alchemy
 
 # App Description and Use
-
-Working on it ...
+Visit https://worksheetwiz.netlify.app/worksheet-generator
